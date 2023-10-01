@@ -23,12 +23,13 @@ export class App extends Component {
     });
   }
 
-  componentDidUpdate(prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.contacts.length !== prevState.contacts.length) {
       const strContacts = JSON.stringify(this.state.contacts);
       localStorage.setItem('contacts', strContacts);
     }
   }
+  
 
   addContact = contact => {
     const { name, number } = contact;
@@ -59,7 +60,7 @@ export class App extends Component {
   };
 
   handleChangeFilter = e => {
-    this.setState({ filter: e.target.value });
+    this.setState({ filter: e.target.value.toLowerCase() });
   };
 
   deleteContact = id => {
